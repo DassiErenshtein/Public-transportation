@@ -2,6 +2,8 @@ package com.example.dassi.Models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +21,10 @@ public class Line {
     private String number;
     private String source;
     private String detinations;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "line", fetch = FetchType.LAZY)
     private List<StationLine> stationLines;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "line", fetch = FetchType.LAZY)
     private List<Travel> travels;
 

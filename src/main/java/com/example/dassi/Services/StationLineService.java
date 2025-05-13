@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.dassi.Converters.StationLineConverter;
 import com.example.dassi.DTOs.StationLineDTO;
 import com.example.dassi.Models.StationLine;
+import com.example.dassi.Repositories.LineRepo;
 import com.example.dassi.Repositories.StationLineRepo;
 
 @Service
@@ -19,6 +20,8 @@ public class StationLineService {
     private StationLineRepo stationLineRepo;
     @Autowired
     private StationLineConverter stationLineConverter;
+    @Autowired
+    private LineRepo lineRepo;
 
     public List<StationLineDTO> getAllStationLines() {
         return stationLineConverter.toListDTO(stationLineRepo.findAll());
@@ -31,21 +34,18 @@ public class StationLineService {
         }
         StationLine stationLine = stationLineRepo.findByStationIdAndLineId(stationLineDTO.getStationId(),
                 stationLineDTO.getLineId()).get();
-        stationLineRepo.filterByLineId(stationLineDTO.getLineId())
-                .filter(x -> ((StationLine) x).getStationOrder() > stationLineDTO.getStationOrder()).stream()
-                .forEach(x -> {
-                    StationLine s = ((StationLine) x);
-                    s.setStationOrder(s.getStationOrder() + 1);
-                    stationLineRepo.save(s);
-                    try {
-                        stationLineRepo.save(s);
-                    } catch (Exception error) {
-                        error.printStackTrace();
-                        System.out.println("שגיאה" + error.getMessage());
-                    }
-                });
         if (stationLine != null) {
             try {
+                List<StationLine> list = lineRepo.findById(stationLineDTO.getLineId()).get().getStationLines();
+                // stationLineRepo.filterByLineId(stationLineDTO.getLineId());
+                list.stream()
+                        .filter(x -> x.getStationOrder() <= stationLineDTO.getStationOrder()
+                                && x.getStationOrder() < stationLine.getStationOrder())
+                        .forEach(x -> {
+                            x.setStationOrder(x.getStationOrder() + 1);
+                            stationLineRepo.save(x);
+                        });
+
                 stationLine.setStationOrder(stationLineDTO.getStationOrder());
                 stationLineRepo.save(stationLine);
                 return true;
@@ -55,7 +55,6 @@ public class StationLineService {
                 return false;
             }
         }
-
         return false;
     }
 
@@ -63,14 +62,20 @@ public class StationLineService {
         if (stationLineDTO.getLineId() == null || stationLineDTO.getStationId() == null) {
             return false;
         }
-        stationLineDTO.setStationOrder(
-                stationLineRepo.filterByLineId(stationLineDTO.getLineId())
-                        .stream()
-                        .mapToInt(s -> ((StationLine) s).getStationOrder())
-                        .max()
-                        .orElse(0) + 1);
+        // Optional o = stationLineRepo.filterByLineId(stationLineDTO.getLineId());
+        // if (!o.isPresent()) {
+        // return false;
+        // }
+
         StationLine stationLine = stationLineConverter.toModel(stationLineDTO);
         if (stationLine != null && !stationLineRepo.exists(Example.of(stationLine))) {
+            List<StationLine> list = lineRepo.findById(stationLineDTO.getLineId()).get().getStationLines();
+            stationLineDTO.setStationOrder(
+                    list
+                            .stream()
+                            .mapToInt(s -> s.getStationOrder())
+                            .max()
+                            .orElse(0) + 1);
             try {
                 stationLineRepo.save(stationLine);
                 return true;

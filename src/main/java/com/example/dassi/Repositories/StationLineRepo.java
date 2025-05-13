@@ -17,5 +17,5 @@ import org.springframework.stereotype.Repository;
 public interface StationLineRepo extends JpaRepository<StationLine, StationLineId> {
     public Optional<StationLine> findByStationIdAndLineId(Long stationId, Long lineId);
 
-    public Optional<List<StationLine>> filterByLineId(Long lineId);
+    // public Optional<List<StationLine>> filterByLineId(Long lineId);
 }

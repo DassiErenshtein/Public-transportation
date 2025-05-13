@@ -2,6 +2,8 @@ package com.example.dassi.Models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,7 @@ public class Station {
     private Long id;
     private String name;
     private int number;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "station", fetch = FetchType.LAZY)
     private List<StationLine> stationLines;
 

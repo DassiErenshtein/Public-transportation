@@ -5,14 +5,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.dassi.DTOs.LineDTO;
 import com.example.dassi.Models.Line;
-import com.example.dassi.Models.Station;
-import com.example.dassi.Models.StationLine;
 import com.example.dassi.Repositories.StationLineRepo;
 import com.example.dassi.Repositories.StationRepo;
 import com.example.dassi.Repositories.TravelRepo;
