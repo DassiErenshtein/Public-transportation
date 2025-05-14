@@ -37,7 +37,6 @@ public class StationLineService {
         if (stationLine != null) {
             try {
                 List<StationLine> list = lineRepo.findById(stationLineDTO.getLineId()).get().getStationLines();
-                // stationLineRepo.filterByLineId(stationLineDTO.getLineId());
                 list.stream()
                         .filter(x -> x.getStationOrder() <= stationLineDTO.getStationOrder()
                                 && x.getStationOrder() < stationLine.getStationOrder())
