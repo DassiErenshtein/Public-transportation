@@ -1,10 +1,10 @@
-# 🚍 Public Transport Management System – Java Spring Boot
+# Public Transport Management System – Java Spring Boot
 
 A backend project for managing a public transport system, built with Java and Spring Boot.
 
 ---
 
-## 🔧 Main Features
+## Main Features
 
 - Admin functions:
   - Add travel
@@ -20,9 +20,9 @@ A backend project for managing a public transport system, built with Java and Sp
       
 ---
 
-## ⚙️ Installation & Run Instructions
+## Installation & Run Instructions
 
-### 📋 Prerequisites
+### Prerequisites
 
 - Java JDK 17+
 - Maven
@@ -31,7 +31,7 @@ A backend project for managing a public transport system, built with Java and Sp
 
 ---
 
-### 📦 Clone the Project
+### Clone the Project
 
 ```bash
 git clone https://DassiErenstein/Public-transportation.git
