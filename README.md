@@ -34,8 +34,7 @@ A backend project for managing a public transport system, built with Java and Sp
 ### 📦 Clone the Project (if applicable)
 
 ```bash
-git clone https://your-repo-url.git
-cd your-project-folder
+git clone [https://DassiErenstein/Public-transportation.git](https://github.com/DassiErenshtein/Public-transportation.git)
 
 ---
 
