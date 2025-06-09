@@ -40,4 +40,6 @@ git clone https://DassiErenstein/Public-transportation.git
 ---
 
 ### ▶️ Run the Project
+```bash
 mvn spring-boot:run
+```
