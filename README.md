@@ -1,65 +1,54 @@
-# Public Transportation Project - Java Spring Boot
+# 🚍 Public Transport Management System – Java Spring Boot
 
-## 📦 Project Overview
-
-This is a public transportation management system built using **Java Spring Boot**.  
-It includes full support for bus lines, stations, drivers, travels, and administrative operations.
+A backend project for managing a public transport system, built with Java and Spring Boot.
 
 ---
 
-## 🛠️ Admin Features
+## 🗂️ Data Model Overview
 
-1. **Create New Travel**  
-   Add a travel with selected line, bus, driver, and departure time.
-
-2. **Add/Remove Station from Line**  
-   Dynamically update the list of stations for a line, including auto-updating the `station_order`.
-
----
-
-## 🚏 Passenger-Oriented Features ("קל קו")
-
-### 1. 🔎 Search by Station
-
-**Parameters:**  
-- Station ID  
-- (Optional) Line Number
-
-**Behavior:**  
-- Returns list of travels going through this station.  
-- If line number is provided, filters only travels of that line.  
-- Filters travels where:  
-  `travel_time - current_time >= station_order`  
-- Sorts by time and returns the **next 5 travels**.
-
-### 2. 🔎 Search by Line
-
-Two functions:
-
-- **Get All Stations of a Line**  
-  Input: Line number → Output: List of stations in correct order.
-
-- **Get Current Bus Positions for a Line**  
-  Input: Line number → Output: For each travel of that line, shows expected current location (based on time and station order).
-
-### 3. 🧠 Saved Searches  
-  Support for quick access to user's saved searches.
-
-### 4. ⏮️ Last Search  
-  Re-perform the most recent user query.
-
-### 5. 📅 Schedules
-
-Three schedule views:
-- All travels of the day  
-- Travels at a specific time  
-- Last travel of the day  
+- **Travel**: `id`, `bus_id`, `driver_id`, `line_id`, `departure_time`
+- **Bus**: `id`, `license_plate`, `seats`
+- **Driver**: `id`, `name`, `phone`
+- **Line**: `id`, `number`, `source`, `destination`
+- **Station**: `id`, `name`
+- **Station_Line**: `line_id`, `station_id`, `station_order`  
+  _(Join table to manage the many-to-many relationship between lines and stations)_
 
 ---
 
-## 🚀 Getting Started
+## 🔧 Main Features
 
-1. Clone the project:
-   ```bash
-   git clone https://your-repo-url
-   cd public-transportation
+- Admin functions:
+  - Add travel
+  - Add/remove station from a line and update station order
+- "Smart Line" functions:
+  - Search by station (next 5 relevant travels to this station)
+  - Search by line:
+    - Show current bus positions along the route
+    - Show all stations on the line
+  - Saved and recent searches
+  - Timetable view:
+    - All travels / travels by hour / last travel of the day
+
+> 🕒 Assumptions:
+> - Travel time between stations is 1 minute  
+> - The list of travels is the same every day
+
+---
+
+## ⚙️ Installation & Run Instructions
+
+### 📋 Prerequisites
+
+- Java JDK 17+
+- Maven
+- IDE (e.g., IntelliJ IDEA / Eclipse / VSCode)
+- Git (if cloning from remote)
+
+---
+
+### 📦 Clone the Project (if applicable)
+
+```bash
+git clone https://your-repo-url.git
+cd your-project-folder
