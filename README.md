@@ -7,13 +7,6 @@ It includes full support for bus lines, stations, drivers, travels, and administ
 
 ---
 
-## 🧠 Assumptions
-
-- Travel time between stations is **1 minute**.
-- Each day includes the **same fixed travel schedule**.
-
----
-
 ## 🛠️ Admin Features
 
 1. **Create New Travel**  
